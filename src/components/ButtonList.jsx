@@ -8,19 +8,17 @@ const ButtonList = () => {
     "Songs",
     "Live",
     "Cricket",
-    "Scoccer",
+    "Mutual Fund",
     "News",
-    "Mutual Funds",
+
     "Stocks",
-    "Music",
     "Coding",
-    "Stocks",
     "Music",
-    "Coding",
+    "Documentary",
   ];
   return (
     <>
-      <div className="flex ml-5 mt-3 h-20 ">
+      <div className="flex  flex-row pt-2 md:pt-0  overflow-x-scroll scrollbar scrollbar-hide ">
         {list.map((item) => (
           <Button name={item} key={item} />
         ))}

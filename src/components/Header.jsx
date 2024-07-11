@@ -12,7 +12,7 @@ const Header = () => {
   };
   return (
     <>
-      <div className="grid  grid-flow-col justify-between  shadow-md py-1 ">
+      <div className="grid  grid-flow-col w-full justify-between bg-white sticky top-0  py-1 z-30 ">
         <div className=" flex items-center col-span-2 space-x-3 ">
           <img
             src={hamburger_menu}
