@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { countToDisplaycount } from '../utils/constants'
 import {FaThumbsUp,FaThumbsDown} from 'react-icons/fa'
+import { subscribeData } from '../utils/Slices/movieSlice'
 
 const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
     
@@ -9,13 +10,14 @@ const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
   const[like,setLike]=useState(false)
   const[unlike,setUnlike]=useState(false)
  
-    console.log("videoInfo", videoInfo)
-   console.log("channelInfo", channelInfo)
+
+
+  
 
    const{snippet,statistics}=videoInfo
    const{title}=snippet
 
-  const{viewCount,likeCount}=statistics
+    
  
   
  
@@ -23,7 +25,7 @@ const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
         
   return (
     <>
-        <div className='ml-9 mt-3 p-5 '>
+        <div className='ml-9 mt-3 p-5  '>
         <div className="   ">
         <iframe
           className="rounded-lg "
@@ -58,8 +60,11 @@ const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
       <div className='  ml-16 '>
         {subscribe ? <button  onClick={()=>setSubscribe(!subscribe)}>Subscribed</button>:
         <button onClick={()=>setSubscribe(!subscribe)}>Subscribe</button>
-        
-      }
+        }
+      
+      
+
+    
  
       
       </div>

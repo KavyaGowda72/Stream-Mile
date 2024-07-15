@@ -6,10 +6,13 @@ import { YOUTUBE_API_KEY } from "../secretkey";
 import WatchPageContainer from "./WatchPageContainer";
 import { movieData } from "../utils/Slices/movieSlice";
 
+import SideContainer from "./SideContainer";
+
 const WatchPage = () => {
   const dispatch = useDispatch();
   const watchPageMovie = useSelector((store) => store.movies.movie);
   const [searchParam] = useSearchParams();
+  const categoryId = watchPageMovie?.videoInfo?.snippet?.categoryId;
   const videoId = searchParam.get("v");
 
   const getVideoById = async () => {
@@ -51,13 +54,16 @@ const WatchPage = () => {
 
   return (
     <>
-      {watchPageMovie && (
-        <WatchPageContainer
-          videoId={videoId}
-          videoInfo={watchPageMovie.videoInfo}
-          channelInfo={watchPageMovie.channelInfo}
-        />
-      )}
+      <div className="flex w-full">
+        {watchPageMovie && (
+          <WatchPageContainer
+            videoId={videoId}
+            videoInfo={watchPageMovie.videoInfo}
+            channelInfo={watchPageMovie.channelInfo}
+          />
+        )}
+        <SideContainer categoryId={categoryId} />
+      </div>
     </>
   );
 };

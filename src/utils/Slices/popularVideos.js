@@ -4,6 +4,7 @@ const popularVideos=createSlice({
     name:"popular",
     initialState:{
         popularVideos:[],
+        suggestedVideos:[]
        
        
     },
@@ -11,6 +12,9 @@ const popularVideos=createSlice({
         addPopularVideos:(state,action)=>{
             state.popularVideos=action.payload
         },
+        sideContainer:(state,action)=>{
+           state.suggestedVideos=action.payload
+        }
         
        
        
@@ -18,4 +22,4 @@ const popularVideos=createSlice({
 
 })
 export default popularVideos.reducer
-export const{addPopularVideos}=popularVideos.actions
+export const{addPopularVideos,sideContainer}=popularVideos.actions
