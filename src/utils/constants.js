@@ -1,7 +1,9 @@
-const GOOGLE_API_KEY="AIzaSyBG1z-rYbGfyGkCuF9C4rzTYYrIJw4mc4Q"
+import { YOUTUBE_API_KEY } from "../secretkey";
 
-export const YOUTUBE_API_KEY="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=52&regionCode=IN&key="+GOOGLE_API_KEY
 
+export const YOUTUBE_API="https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=52&regionCode=IN&key="+YOUTUBE_API_KEY
+
+ 
 
 export   const countToDisplaycount=(viewCount)=>
     {

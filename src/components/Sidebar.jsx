@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const toggleSideBar = useSelector((store) => store.sidebar.isMenuOpen);
@@ -7,10 +8,12 @@ const Sidebar = () => {
   return (
     <>
       {toggleSideBar && (
-        <div className="shadow-2xl px-3  text-center mt-5  w-52  min-w-[240px]   h-screen overflow-y-auto   ">
+        <div className="shadow-2xl px-3  text-center mt-5  w-52  min-w-[240px] cursor-pointer  h-screen overflow-y-auto scrollbar scrollbar-hide   ">
           {/* w-2/12 text-center p-2   shadow-lg min-w-[240px] h-screen overflow-y-auto hide-scrollbar */}
           <ul className="space-y-2 ">
-            <li>Home</li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
             <li>Shorts</li>
             <li>Subscriptions</li>
           </ul>

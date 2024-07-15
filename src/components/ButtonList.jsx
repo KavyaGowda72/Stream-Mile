@@ -18,7 +18,7 @@ const ButtonList = () => {
   ];
   return (
     <>
-      <div className="flex  flex-row pt-2 md:pt-0  overflow-x-scroll scrollbar scrollbar-hide ">
+      <div className="flex  flex-row  pt-2 md:pt-0  overflow-x-scroll scrollbar scrollbar-hide bg-zinc-900 ">
         {list.map((item) => (
           <Button name={item} key={item} />
         ))}

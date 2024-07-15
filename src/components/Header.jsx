@@ -4,9 +4,11 @@ import app_logo from "../utils/Images/youtube_logo.png";
 import notification_logo from "../utils/Images/notification.png";
 import { useDispatch } from "react-redux";
 import { addSideBar } from "../utils/Slices/sideBarSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
+
   const handleSidebarClick = () => {
     dispatch(addSideBar());
   };
@@ -21,7 +23,13 @@ const Header = () => {
             onClick={handleSidebarClick}
           />
 
-          <img src={app_logo} className="h-14" alt="app_logo" />
+          <a href="/">
+            <img
+              src={app_logo}
+              className="h-14 cursor-pointer"
+              alt="app_logo"
+            />
+          </a>
         </div>
 
         <div className=" flex items-center col-span-9 ">

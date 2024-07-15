@@ -9,9 +9,12 @@ const sideBarSlice= createSlice({
 
         addSideBar:(state)=>{
             state.isMenuOpen = !state.isMenuOpen
+        },
+        menuClose:(state)=>{
+            state.isMenuOpen=false
         }
     }
 })
 
-export const{addSideBar}=sideBarSlice.actions
+export const{addSideBar,menuClose}=sideBarSlice.actions
 export default sideBarSlice.reducer
