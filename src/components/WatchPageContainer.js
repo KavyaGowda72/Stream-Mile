@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { countToDisplaycount } from '../utils/constants'
+
 import {FaThumbsUp,FaThumbsDown} from 'react-icons/fa'
-import { subscribeData } from '../utils/Slices/movieSlice'
+
 
 const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
     

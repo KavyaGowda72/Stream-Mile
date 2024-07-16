@@ -3,6 +3,8 @@ import { YOUTUBE_API_KEY } from "../secretkey";
 import { useDispatch, useSelector } from "react-redux";
 import { sideContainer } from "../utils/Slices/popularVideos";
 import SideList from "./SideList";
+import { Link } from "react-router-dom";
+import useSearchApi from "../utils/Custom Hooks/useSearchApi";
 
 const SideContainer = ({ categoryId }) => {
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const SideContainer = ({ categoryId }) => {
         YOUTUBE_API_KEY
     );
     const json = await data.json();
-    // console.log("json", json);
+
     const channelId = json.items.map((video) => video?.snippet?.channelId);
 
     const chanelDetailsPromise = channelId.map(async (id) => {
@@ -50,14 +52,23 @@ const SideContainer = ({ categoryId }) => {
   }, []);
   return (
     <>
-      <div className=" w-full mt-7 rounded-lg">
+      <div className=" w-full mt-7 rounded-lg cursor-pointer">
         {sideContainerVideos &&
           sideContainerVideos.map((video) => (
-            <div className="">
-              <SideList
-                videoinfo={video.videoInfo}
-                channelinfo={video.channelInfo}
-              />
+            <div className=" ">
+              <Link
+                key={video.videoInfo.id.videoId}
+                to={
+                  video.videoInfo.id.videoId
+                    ? "/watch?v=" + video.videoInfo.id.videoId
+                    : "/watch?v=" + video.videoInfo.id
+                }
+              >
+                <SideList
+                  videoinfo={video.videoInfo}
+                  channelinfo={video.channelInfo}
+                />
+              </Link>
             </div>
           ))}
       </div>

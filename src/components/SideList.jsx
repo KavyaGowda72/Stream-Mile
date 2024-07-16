@@ -7,7 +7,7 @@ const SideList = ({ videoinfo, channelinfo }) => {
   const viewCount = channelinfo?.statistics?.viewCount;
 
   return (
-    <div className="flex space-y-2  ">
+    <div className="flex space-y-2 cursor-pointer  ">
       <div className=" ">
         <img alt="img" className="rounded-xl p-2" src={thumbnails.medium.url} />
       </div>
