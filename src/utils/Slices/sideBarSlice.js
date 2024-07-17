@@ -4,7 +4,7 @@ const sideBarSlice= createSlice({
     name:"sidebar",
     initialState:{
         isMenuOpen:true,
-        inputSuggestion:false,
+       
     },
     reducers:{
 
@@ -14,11 +14,9 @@ const sideBarSlice= createSlice({
         menuClose:(state)=>{
             state.isMenuOpen=false
         },
-        showSuggestion:(state)=>{
-            state.inputSuggestion=!state.inputSuggestion
-        }
+       
     }
 })
 
-export const{addSideBar,menuClose,showSuggestion}=sideBarSlice.actions
+export const{addSideBar,menuClose}=sideBarSlice.actions
 export default sideBarSlice.reducer

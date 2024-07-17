@@ -4,13 +4,15 @@ import app_logo from "../utils/Images/youtube_logo.png";
 import notification_logo from "../utils/Images/notification.png";
 import { useDispatch, useSelector } from "react-redux";
 import { addSideBar, showSuggestion } from "../utils/Slices/sideBarSlice";
+import { cacheResults } from "../utils/Slices/inputSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [inputData, setInputData] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [showSugegestion, setShowSuggestion] = useState(false);
 
-  const input = useSelector((store) => store.sidebar.inputSuggestion);
+  const searchCache = useSelector((store) => store.input);
 
   console.log(inputData);
 
@@ -18,13 +20,15 @@ const Header = () => {
     dispatch(addSideBar());
   };
 
-  const handleInput = () => {
-    dispatch(showSuggestion());
-  };
-
   useEffect(() => {
     //Debouncing
-    const timer = setTimeout(() => getSearchApi(), 200);
+    const timer = setTimeout(() => {
+      if (searchCache[inputData]) {
+        setSuggestions(searchCache[inputData]);
+      } else {
+        getSearchApi();
+      }
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -40,6 +44,12 @@ const Header = () => {
     const json = await data.json();
     console.log(json);
     setSuggestions(json[1]);
+
+    dispatch(
+      cacheResults({
+        [inputData]: json[1],
+      })
+    );
   };
 
   return (
@@ -66,17 +76,19 @@ const Header = () => {
           <div className="">
             <input
               type="text"
-              className="w-2/3 px-3 p-2 hover:cursor-text  border border-black rounded-l-full outline-none  "
+              className="w-2/3 px-3 p-2 hover:cursor-text  border border-black rounded-l-full outline-none focus:border-blue-500  "
               placeholder="Search"
               value={inputData}
               onChange={(e) => setInputData(e.target.value)}
-              onClick={handleInput}
+              onFocus={() => setShowSuggestion(true)}
+              onBlur={() => setShowSuggestion(false)}
             />
             <button className=" p-2 w-14 outline-none  border  border-black rounded-r-full bg-gray-200   ">
               🔍
             </button>
           </div>
-          {input && (
+
+          {showSugegestion && (
             <div className="fixed bg-white py-2 px-6 w-[35rem] rounded-md shadow-md border border-gray-100">
               <ul className="">
                 {suggestions.map((sugg) => (
