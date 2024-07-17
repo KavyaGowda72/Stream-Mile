@@ -11,9 +11,9 @@ Features:
    . SideBar
    . Side Container
    . SearchBar => Youtube Search API
-              => Optimization of SearchBar using Debounching
-              => optimising API calls by storing cache
-              => OnFocus : Show Suggestions , OnBlur: Hide Suggestions
+               => Optimization of SearchBar using Debounching
+               => optimising API calls by storing cache
+               => OnFocus : Show Suggestions , OnBlur: Hide Suggestions
               
                
 
