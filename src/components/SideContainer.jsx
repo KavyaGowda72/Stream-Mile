@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { sideContainer } from "../utils/Slices/popularVideos";
 import SideList from "./SideList";
 import { Link } from "react-router-dom";
-import useSearchApi from "../utils/Custom Hooks/useSearchApi";
 
 const SideContainer = ({ categoryId }) => {
   const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const SideContainer = ({ categoryId }) => {
       return chanelJson.items[0];
     });
     const chanelDetails = await Promise.all(chanelDetailsPromise);
-    //console.log(chanelDetails);
 
     const videosWithChannelDetails = json?.items?.map((video, index) => ({
       videoInfo: video,

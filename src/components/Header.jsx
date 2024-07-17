@@ -2,19 +2,24 @@ import React, { useEffect, useState } from "react";
 import hamburger_menu from "../utils/Images/hamburger_menu.png";
 import app_logo from "../utils/Images/youtube_logo.png";
 import notification_logo from "../utils/Images/notification.png";
-import { useDispatch } from "react-redux";
-import { addSideBar } from "../utils/Slices/sideBarSlice";
-import useSearchApi from "../utils/Custom Hooks/useSearchApi";
-import { YOUTUBE_API_KEY } from "../secretkey";
+import { useDispatch, useSelector } from "react-redux";
+import { addSideBar, showSuggestion } from "../utils/Slices/sideBarSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
   const [inputData, setInputData] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const input = useSelector((store) => store.sidebar.inputSuggestion);
 
   console.log(inputData);
 
   const handleSidebarClick = () => {
     dispatch(addSideBar());
+  };
+
+  const handleInput = () => {
+    dispatch(showSuggestion());
   };
 
   useEffect(() => {
@@ -28,19 +33,18 @@ const Header = () => {
 
   const getSearchApi = async () => {
     const data = await fetch(
-      "https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=" +
-        inputData +
-        "&key=" +
-        YOUTUBE_API_KEY
+      "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=" +
+        inputData
     );
 
     const json = await data.json();
-    console.log(json.items);
+    console.log(json);
+    setSuggestions(json[1]);
   };
 
   return (
     <>
-      <div className="grid  grid-flow-col w-full justify-between bg-white sticky top-0  py-1 z-30 ">
+      <div className="grid items-center  grid-flow-col w-full justify-between  bg-white sticky top-0  py-1 z-30 ">
         <div className=" flex items-center col-span-2 space-x-3 ">
           <img
             src={hamburger_menu}
@@ -58,18 +62,36 @@ const Header = () => {
           </a>
         </div>
 
-        <div className=" flex items-center col-span-9 ">
-          <input
-            type="text"
-            className="w-2/3  p-2 border border-black rounded-l-full outline-none focus:border-blue-600 "
-            placeholder="Search"
-            value={inputData}
-            onChange={(e) => setInputData(e.target.value)}
-          />
-          <button className=" p-2 w-14 outline-none  border  border-black rounded-r-full bg-gray-200   ">
-            🔍
-          </button>
+        <div className="  col-span-9 ">
+          <div className="">
+            <input
+              type="text"
+              className="w-2/3 px-3 p-2 hover:cursor-text  border border-black rounded-l-full outline-none  "
+              placeholder="Search"
+              value={inputData}
+              onChange={(e) => setInputData(e.target.value)}
+              onClick={handleInput}
+            />
+            <button className=" p-2 w-14 outline-none  border  border-black rounded-r-full bg-gray-200   ">
+              🔍
+            </button>
+          </div>
+          {input && (
+            <div className="fixed bg-white py-2 px-6 w-[35rem] rounded-md shadow-md border border-gray-100">
+              <ul className="">
+                {suggestions.map((sugg) => (
+                  <li
+                    key={sugg}
+                    className="shadow-sm py-1 hover:bg-gray-100 rounded-sm cursor-pointer"
+                  >
+                    {sugg}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
+
         <div className="flex items-center col-span-1 mr-5">
           <img src={notification_logo} className="h-6" alt="logo" />
         </div>
