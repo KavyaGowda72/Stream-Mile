@@ -12,9 +12,7 @@ const SideContainer = ({ categoryId }) => {
     (store) => store.popular.suggestedVideos
   );
 
-  //console.log("sideContainerVideos", sideContainerVideos);
-
-  const getChategoryId = async () => {
+  const getCategoryId = async () => {
     const data = await fetch(
       "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&order=date&videosCategoryId=" +
         categoryId +
@@ -46,16 +44,15 @@ const SideContainer = ({ categoryId }) => {
   };
 
   useEffect(() => {
-    getChategoryId();
+    if (!sideContainerVideos) getCategoryId();
   }, []);
   return (
     <>
       <div className=" w-full mt-7 rounded-lg cursor-pointer">
         {sideContainerVideos &&
           sideContainerVideos.map((video) => (
-            <div className=" ">
+            <div className=" " key={video.videoInfo.id.videoId}>
               <Link
-                key={video.videoInfo.id.videoId}
                 to={
                   video.videoInfo.id.videoId
                     ? "/watch?v=" + video.videoInfo.id.videoId

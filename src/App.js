@@ -5,12 +5,14 @@ import Header from './components/Header';
 import WatchPage from '../src/components/WatchPage'
 import './index.css'
 import MainContainer from './components/MainContainer';
+import SearchResults from './components/SearchResults';
 
 function App() {
   return (
     <div className=" " >
     <Header/>
-    <RouterProvider router={appRoute}/>
+    <Body/>
+    
     
     </div>
   );
@@ -19,7 +21,7 @@ function App() {
 export const appRoute=createBrowserRouter([
   {
   patht:'/',
-  element:<Body/>,
+  element:<App/>,
 
   children:[
     {
@@ -30,6 +32,10 @@ export const appRoute=createBrowserRouter([
       path:'watch',
       element:<WatchPage/>
     },
+    {
+      path:'/results',
+      element:<SearchResults/>
+    }
     
      
   ]

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import {FaThumbsUp,FaThumbsDown} from 'react-icons/fa'
+import CommentsContainer from './CommentsContainer'
 
 
 const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
@@ -34,7 +35,7 @@ const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
             "https://www.youtube.com/embed/" + videoId + "?si=Xaik7eEjomfnD-np"
           }
           title="YouTube video player"
-          frameBorder="0"
+         
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
@@ -74,6 +75,7 @@ const WatchPageContainer = ({videoId,videoInfo,channelInfo}) => {
       </div>
       <div>
         {/* Comments */}
+        <CommentsContainer/>
       </div>
       </div>
       

@@ -18,7 +18,7 @@ const usePopularVideos =()=>{
     
       useEffect(() => {
         //Memoization
-        getPopularVideos();
+       getPopularVideos();
       }, []);
 
 }

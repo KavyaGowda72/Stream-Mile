@@ -3,25 +3,37 @@ import hamburger_menu from "../utils/Images/hamburger_menu.png";
 import app_logo from "../utils/Images/youtube_logo.png";
 import notification_logo from "../utils/Images/notification.png";
 import { useDispatch, useSelector } from "react-redux";
-import { addSideBar, showSuggestion } from "../utils/Slices/sideBarSlice";
+import {
+  addSideBar,
+  menuClose,
+  showSuggestion,
+} from "../utils/Slices/sideBarSlice";
 import { cacheResults } from "../utils/Slices/inputSlice";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [inputData, setInputData] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSugegestion, setShowSuggestion] = useState(false);
 
   const searchCache = useSelector((store) => store.input);
 
-  console.log(inputData);
-
   const handleSidebarClick = () => {
     dispatch(addSideBar());
   };
 
+  const handleSuggestion = (e) => {
+    const suggestiontext = e.target.innerText.split(" ").join("+");
+    console.log("suggestiontext", suggestiontext);
+    console.log("suggestiontext", suggestiontext);
+    navigate("/results?search_query=" + suggestiontext);
+  };
+
   useEffect(() => {
-    //Debouncing
+    //Debouncing and storing cache
     const timer = setTimeout(() => {
       if (searchCache[inputData]) {
         setSuggestions(searchCache[inputData]);
@@ -93,6 +105,7 @@ const Header = () => {
               <ul className="">
                 {suggestions.map((sugg) => (
                   <li
+                    onMouseDown={(e) => handleSuggestion(e)}
                     key={sugg}
                     className="shadow-sm py-1 hover:bg-gray-100 rounded-sm cursor-pointer"
                   >
